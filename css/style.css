@@ -1,0 +1,205 @@
+.container {
+  max-width: 1200px;
+  color: white;
+}
+header {
+  background-color: red;
+  height: 90px;
+  display: flex;
+}
+header h2 {
+  padding: 10px 30px;
+  color: white;
+}
+main {
+  
+	background-image: url("../img/pallone-infuocato.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	max-width:calc (100% - 20px);
+	min-height: calc(100vh - 90px);
+}
+main .container {
+  min-height: calc(100vh - 170px);
+}
+footer {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  height: 80px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+  text-align: right;
+}
+.fields {
+  display: flow-root;
+  margin: 10px 0;
+}
+.view-match {
+  margin-top: 50px;
+}
+.view-match .team {
+  min-height: 90px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+.view-match .team h1 {
+  background: transparent;
+  color: black;
+  -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+.view-match .team div h1:nth-child(2) {
+  background:
+    transparent;
+  color:
+    black;
+  -webkit-text-fill-color:
+    #fff008;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color:
+    white;
+}
+.view-match .results {
+  height: 50px;
+}
+.match-date {
+  width: 100%;
+  display: block;
+  background: white;
+  color: black;
+  height: 90px;
+  font-size: 40px;
+  padding: 20px;
+}
+.result-desc {
+  background: white;
+  color: black;
+  padding: 10px;
+}
+.results div {
+  text-align: center;
+}
+.results span {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  min-width: 100px;
+}
+.desc {
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.desc span {
+  background: transparent;
+  color: black;
+  -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  width: 300px;
+  display: inline-block;
+  margin: 15px;
+  text-transform: uppercase;
+}
+#recent-results {
+  display: table;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+#recent-results thead th {
+  height: 50px;
+  width: 33.333333%;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 18px;
+  letter-spacing: 2px;
+  background-color: #222;
+}
+#recent-results tbody tr {
+  height: 50px;
+}
+#recent-results tbody tr td {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 18px;
+  letter-spacing: 2px;
+  background-color: #222;
+}
+#recent-results tbody .w {
+  color: white;
+  background-color: #00C853;
+  padding: 0 2px;
+  border-radius: 5px;
+  display: inline-block;
+  min-width: 22px;
+  margin: 0 2px;
+}
+#recent-results tbody .l {
+  color: white;
+  background-color: red;
+  padding: 0 2px;
+  border-radius: 5px;
+  display: inline-block;
+  min-width: 22px;
+  margin: 0 2px;
+}
+#recent-results tbody .d {
+  color: white;
+  background-color: #FFB300;
+  padding: 0 2px;
+  border-radius: 5px;
+  display: inline-block;
+  min-width: 22px;
+  margin: 0 2px;
+}
+#table-odds {
+  display: table;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+#table-odds tr {
+  height: 50px;
+}
+#table-odds tr td {
+  text-align: center;
+  width: 33.333333%;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 18px;
+  letter-spacing: 2px;
+  background-color: #222;
+}
+#table-odds tr td .odds-desc {
+  padding: 0 20px;
+  font-size: 18px;
+  letter-spacing: 10px;
+}
+#table-odds tr td .QUOTE-DESCRIZIONE {
+  padding: 5px 5px;
+  font-size: 40px,100%;
+	font-display:auto;
+  letter-spacing:auto;
+  background: #F73333;
+}
+#table-odds tr td .odds-num {
+  padding: 0 20px;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+@media (min-width: 992px) {}
+@media (min-width: 1200px) {}
+@media screen and (max-width: 1199px) {}
+@media screen and (max-width: 991px) {}
+@media screen and (max-width: 767px) {
+  header h2 {
+    font-size: 26px;
+  }
+}
+@media screen and (max-width: 479px) {}

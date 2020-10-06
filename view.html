@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Betexplorer - view</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css"rel="stylesheet">
+        <link href="js/select2/select2_metro.css"rel="stylesheet">
+
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+          <h2 class="text-center text-uppercase"><strong>Betexplorer Import Result</strong></h2>
+        </header>
+        <main>
+            <div class="container">
+                <div class="fields">
+                    <div class="field">
+                        <div class="col-lg-4">
+                            <select class="m-select2" id="select_country" name="select_country">
+                                <option value="" disabled selected hidden>SELEZIONA NAZIONE</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="col-lg-4">
+                            <select class="m-select3" id="select_league" name="select_league">
+                                <option value="" disabled selected hidden>CAMPIONATO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="col-lg-4">
+                            <select class="m-select4" id="select_match" name="select_match">
+                                <option value="" disabled selected hidden>PARTITE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-match">
+                    <div class="team">
+                        <div class="col-lg-4">
+                            <!-- <img src=""> -->
+                            <h1>SQUADRA 1</h1>
+                            <h1 id="team1-name">____</h1>
+                        </div>
+                        <div class="col-lg-4">
+                            <h1>DATA INCONTRO</h1>
+                            <h1 id="match-date">____:__:__</h1>
+                        </div>
+                        <div class="col-lg-4">
+                            <!-- <img src=""> -->
+                            <h1>SQUADRA 2</h1>
+                            <h1 id="team2-name">____</h1>
+                        </div>
+                    </div>
+                    <table id="recent-results" class="table table-bordered">
+                        <thead>
+                      <th class="QUOTE-DESCRIZIONE" id="team1-th">SQUADRA 1</th>
+                            <th>DESCRIZIONE</th>
+                            <th class="QUOTE-DESCRIZIONE" id="team2-th">SQUADRA 2</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="team1-10">----------</td>
+                                <td>ULTIMI 10 RISULTATI</td>
+                                <td id="team2-10">----------</td>
+                            </tr>
+                            <tr>
+                                <td id="team1-home">-----</td>
+                                <td>ULTIME 5 PARTITE <br>
+                                CASA</td>
+                                <td id="team2-home">-----</td>
+                            </tr>
+                            <tr>
+                                <td id="team1-away">-----</td>
+                                <td>ULTIME 5 PARTITE <br>
+									FUORI CASA</td>
+                                <td id="team2-away">-----</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                <div class="view-odds">
+                    <div class="desc"><span>quote</span></div>
+                    <table id="table-odds" class="table table-bordered">
+                        <tr>
+                            <td>
+                                <span class="QUOTE-DESCRIZIONE"><strong class="angoli">1</strong></span>
+                                
+                            </td>
+                            <td>
+                                <span class="QUOTE-DESCRIZIONE"><strong class="angoli">X</strong></span>
+                                
+                            </td>
+							
+                          <td>
+                                <span class="QUOTE-DESCRIZIONE"><strong class="angoli">2</strong></span>
+                                
+                          </td>
+                        </tr>
+					  <tr>
+                            <td><span id="odds-1" class="odds-num">---</span>
+                          </td>
+                            <td><span id="odds-x" class="odds-num">---</span>
+                            </td>
+							
+                            <td><span id="odds-2" class="odds-num">---</span>
+                            </td>
+                      </tr>
+						<tr>
+                            <td><strong class="QUOTE-DESCRIZIONE">UNDER</strong></td>
+                            <td><strong>QUOTA</strong>&nbsp;</td>
+                          <td> <strong class="QUOTE-DESCRIZIONE">OVER</strong></td>
+                        </tr>
+                        <tr>
+                            <td id="team2-15">---</td>
+                            <td>1.5</td>
+                            <td id="team1-15">---</td>
+                        </tr>
+                        <tr>
+                            <td id="team2-25">---</td>
+                            <td>2.5</td>
+                            <td id="team1-25">---</td>
+                        </tr>
+                        <tr>
+                            <td id="team2-35">---</td>
+                            <td>3.5</td>
+                            <td id="team1-35">---</td>
+                        </tr>
+                    </table>
+                </div>    
+          </div>
+
+                
+            <footer>
+              <h5><em>Copyright all reserved
+                <animatecolor>
+                  <font:arial>Antonio Caré&#x2654</font>
+                </animatecolor>
+              </em></h5>
+            </footer>
+    </main>
+        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script language="JavaScript" type="text/javascript" src="js/app.js"></script>
+        <script language="JavaScript" type="text/javascript" src="js/select2/select2.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.m-select2').select2({ width: '100%' });
+                $('.m-select3').select2({ width: '100%' });
+                $('.m-select4').select2({ width: '100%' });
+                getCountries();
+                
+            });
+            // get country items
+            function getCountries() {
+                jQuery.ajax({
+                    url: "./ajaxApies/getcountries.php",
+                    data: { 
+                    },
+                    dataType: "json",
+                    method: "POST",
+                    success: function(response) {
+                        appendCountriesInfo(response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("ajax error!");
+                    }
+                });
+            }
+
+            function appendCountriesInfo(data) {
+                var i=0;
+                var content='<select class="m-select2" id="select_country" name="select_country">';
+                content =  content + '<option value="" disabled selected hidden>Choose country</option>';
+                for(i=0; i<data.length; i++) {
+                    content = content + `<option value="`+data[i]['id']+`">`+data[i]['country']+`</option>`;
+                }
+                content = content + '</select>';
+
+                var parent = $("#select_country").parent();
+				
+				$("#select_country").remove();
+				$(parent).html(content);
+				$("#select_country").select2({ width: '100%' });
+            }
+
+            // get league items
+            $(document).on('change', '#select_country', function(){
+                var selected_country = $("#select_country option:selected").val();
+                getLeague(selected_country);    
+            });
+
+            function getLeague(id) {
+                jQuery.ajax({
+                    url: "./ajaxApies/getleague.php",
+                    data: { 
+                        country_id: id
+                    },
+                    dataType: "json",
+                    method: "POST",
+                    success: function(response) {
+                        appendLeaguesInfo(response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("ajax error!");
+                    }
+                });
+            }
+
+            function appendLeaguesInfo(data) {
+                var i=0;
+                var content='<select class="m-select3" id="select_league" name="select_league">';
+                content =  content + '<option value="" disabled selected hidden>Choose league</option>';
+                for(i=0; i<data.length; i++) {
+                    content = content + `<option value="`+data[i]['league_name']+`">`+data[i]['league_name']+`</option>`;
+                }
+                content = content + '</select>';
+
+                var parent = $("#select_league").parent();
+				
+				$("#select_league").remove();
+				$(parent).html(content);
+				$("#select_league").select2({ width: '100%' });
+            }
+
+            // get match items
+            $(document).on('change', '#select_league', function(){
+                var selected_league = $("#select_league option:selected").val();
+                getMatch(selected_league);    
+            });
+
+            function getMatch(value) {
+                jQuery.ajax({
+                    url: "./ajaxApies/getmatch.php",
+                    data: { 
+                        league_name: value
+                    },
+                    dataType: "json",
+                    method: "POST",
+                    success: function(response) {
+                        appendMatchesInfo(response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("ajax error!");
+                    }
+                });
+            }
+
+            function appendMatchesInfo(data) {
+                var i=0;
+                var content='<select class="m-select4" id="select_match" name="select_match">';
+                content =  content + '<option value="" disabled selected hidden>Choose match</option>';
+                for(i=0; i<data.length; i++) {
+                    content = content + `<option value="`+data[i]['id']+`">`+data[i]['team1']+ `:` + data[i]['team2'] + `</option>`;
+                }
+                content = content + '</select>';
+
+                var parent = $("#select_match").parent();
+				
+				$("#select_match").remove();
+				$(parent).html(content);
+				$("#select_match").select2({ width: '100%' });
+            }
+            
+            // get odds data
+            $(document).on('change', '#select_match', function(){
+                var selected_match = $("#select_match option:selected").val();
+                getOdds(selected_match);    
+            });
+
+            function getOdds(id) {
+                jQuery.ajax({
+                    url: "./ajaxApies/getodds.php",
+                    data: { 
+                        match_id: id
+                    },
+                    dataType: "json",
+                    method: "POST",
+                    success: function(response) {
+                        appendOddsInfo(response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("ajax error!");
+                    }
+                });
+            }
+            function appendOddsInfo(data) {
+                var info1 = data[0][0];
+                var content = info1['team1'];
+                $("#team1-name").html(content);
+                $("#team1-th").html(content);
+                content = info1['team2'];
+                $("#team2-name").html(content);
+                $("#team2-th").html(content);
+                content = info1['match_time'];
+                $("#match-date").html(content);
+
+                var info2 = data[5][0];
+                var content = info2['odds_1'];
+                $("#odds-1").html(content);
+                var content = info2['odds_x'];
+                $("#odds-x").html(content);
+                var content = info2['odds_2'];
+                $("#odds-2").html(content);
+
+                var odds_15 = data[6][0];
+                var odds_25 = data[6][1];
+                var odds_35 = data[6][2];
+                $("#team1-15").html(odds_15['odds_1']);
+                $("#team2-15").html(odds_15['odds_2']);
+                $("#team1-25").html(odds_25['odds_1']);
+                $("#team2-25").html(odds_25['odds_2']);
+                $("#team1-35").html(odds_35['odds_1']);
+                $("#team2-35").html(odds_35['odds_2']);
+
+                content = "";
+                var team1_10 = data[1];
+                for(i=0; i<team1_10.length; i++) {
+                    content = content + `<span class="`+team1_10[i]['odds']+`">` + team1_10[i]['odds'] + `</span>`;
+                }
+                $("#team1-10").html(content);
+
+                content = "";
+                var team2_10 = data[2];
+                for(i=0; i<team2_10.length; i++) {
+                    content = content + `<span class="`+team2_10[i]['odds']+`">` + team2_10[i]['odds'] + `</span>`;
+                }
+                $("#team2-10").html(content);
+
+                content = "";
+                var team1_home = data[3][0];
+                content = content   + `<span class="`+team1_home['odds_1']+`">` + team1_home['odds_1'] + `</span>`
+                                    + `<span class="`+team1_home['odds_2']+`">` + team1_home['odds_2'] + `</span>`
+                                    + `<span class="`+team1_home['odds_3']+`">` + team1_home['odds_3'] + `</span>`
+                                    + `<span class="`+team1_home['odds_4']+`">` + team1_home['odds_4'] + `</span>`
+                                    + `<span class="`+team1_home['odds_5']+`">` + team1_home['odds_5'] + `</span>`;
+                $("#team1-home").html(content);
+
+                content = "";
+                var team2_home = data[3][1];
+                content = content   + `<span class="`+team2_home['odds_1']+`">` + team2_home['odds_1'] + `</span>`
+                                    + `<span class="`+team2_home['odds_2']+`">` + team2_home['odds_2'] + `</span>`
+                                    + `<span class="`+team2_home['odds_3']+`">` + team2_home['odds_3'] + `</span>`
+                                    + `<span class="`+team2_home['odds_4']+`">` + team2_home['odds_4'] + `</span>`
+                                    + `<span class="`+team2_home['odds_5']+`">` + team2_home['odds_5'] + `</span>`;
+                
+                $("#team2-home").html(content);                
+
+                content = "";
+                var team1_away = data[4][0];
+                content = content   + `<span class="`+team1_away['odds_1']+`">` + team1_away['odds_1'] + `</span>`
+                                    + `<span class="`+team1_away['odds_2']+`">` + team1_away['odds_2'] + `</span>`
+                                    + `<span class="`+team1_away['odds_3']+`">` + team1_away['odds_3'] + `</span>`
+                                    + `<span class="`+team1_away['odds_4']+`">` + team1_away['odds_4'] + `</span>`
+                                    + `<span class="`+team1_away['odds_5']+`">` + team1_away['odds_5'] + `</span>`;
+                
+                $("#team1-away").html(content);
+
+                content = "";
+                var team2_away = data[4][1];
+                
+                content = content   + `<span class="`+team2_away['odds_1']+`">` + team2_away['odds_1'] + `</span>`
+                                    + `<span class="`+team2_away['odds_2']+`">` + team2_away['odds_2'] + `</span>`
+                                    + `<span class="`+team2_away['odds_3']+`">` + team2_away['odds_3'] + `</span>`
+                                    + `<span class="`+team2_away['odds_4']+`">` + team2_away['odds_4'] + `</span>`
+                                    + `<span class="`+team2_away['odds_5']+`">` + team2_away['odds_5'] + `</span>`;
+                
+                $("#team2-away").html(content);                
+
+                console.log(data);
+            }
+            
+        </script>
+    </body>
+</html>
+    
